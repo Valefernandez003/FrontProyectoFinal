@@ -1,6 +1,7 @@
 import styles from "../../styles/forms/CrearClienteForm.module.css";
-import { useState, useEffect } from "react";
 import { clienteService } from "../../services/clienteService";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 
 interface Cliente {
   id: number;
@@ -12,41 +13,35 @@ interface Cliente {
 }
 
 interface Props {
-  cliente: Cliente; 
+  cliente: Cliente;
   onClose: () => void;
-  onUpdated?: () => void; 
+  onUpdated?: () => void;
 }
 
+const validationSchema = Yup.object().shape({
+  nombre: Yup.string().required("El nombre es obligatorio"),
+  dni: Yup.string()
+    .matches(/^[0-9]+$/, "El DNI debe contener solo números")
+    .required("El DNI es obligatorio"),
+  telefono: Yup.string()
+    .matches(/^[0-9]+$/, "El teléfono debe contener solo números")
+    .required("El teléfono es obligatorio"),
+  email: Yup.string().email("Correo inválido").required("El correo es obligatorio"),
+  direccion: Yup.string().required("La dirección es obligatoria"),
+});
+
 export const EditarClienteForm: React.FC<Props> = ({ cliente, onClose, onUpdated }) => {
-  const [nombre, setNombre] = useState("");
-  const [dni, setDni] = useState("");
-  const [telefono, setTelefono] = useState("");
-  const [email, setEmail] = useState("");
-  const [direccion, setDireccion] = useState("");
+  const initialValues = {
+    nombre: cliente.nombre,
+    dni: cliente.dni,
+    telefono: cliente.telefono,
+    email: cliente.email,
+    direccion: cliente.direccion,
+  };
 
-  useEffect(() => {
-    if (cliente) {
-      setNombre(cliente.nombre);
-      setDni(cliente.dni);
-      setTelefono(cliente.telefono);
-      setEmail(cliente.email);
-      setDireccion(cliente.direccion);
-    }
-  }, [cliente]);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const clienteActualizado = {
-      nombre,
-      dni,
-      telefono,
-      email,
-      direccion,
-    };
-
+  const handleSubmit = async (values: typeof initialValues) => {
     try {
-      await clienteService.actualizarCliente(cliente.id, clienteActualizado);
+      await clienteService.actualizarCliente(cliente.id, values);
       if (onUpdated) onUpdated();
       onClose();
     } catch (err) {
@@ -60,59 +55,55 @@ export const EditarClienteForm: React.FC<Props> = ({ cliente, onClose, onUpdated
       <div className={styles.modal}>
         <h2>Editar Cliente</h2>
 
-        <form className={styles.form} onSubmit={handleSubmit}>
-          <label>
-            Nombre:
-            <input 
-              type="text" 
-              value={nombre} 
-              onChange={(e) => setNombre(e.target.value)}
-            />
-          </label>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
+          enableReinitialize
+        >
+          {({ isSubmitting }) => (
+            <Form className={styles.form}>
+              <label>
+                Nombre:
+                <Field type="text" name="nombre" />
+                <ErrorMessage name="nombre" component="div" className={styles.error} />
+              </label>
 
-          <label>
-            DNI:
-            <input 
-              type="number" 
-              value={dni} 
-              onChange={(e) => setDni(e.target.value)}
-            />
-          </label>
+              <label>
+                DNI:
+                <Field type="text" name="dni" />
+                <ErrorMessage name="dni" component="div" className={styles.error} />
+              </label>
 
-          <label>
-            Teléfono:
-            <input 
-              type="number" 
-              value={telefono} 
-              onChange={(e) => setTelefono(e.target.value)}
-            />
-          </label>
+              <label>
+                Teléfono:
+                <Field type="text" name="telefono" />
+                <ErrorMessage name="telefono" component="div" className={styles.error} />
+              </label>
 
-          <label>
-            Correo electrónico:
-            <input 
-              type="text" 
-              value={email} 
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </label>
+              <label>
+                Correo electrónico:
+                <Field type="email" name="email" />
+                <ErrorMessage name="email" component="div" className={styles.error} />
+              </label>
 
-          <label>
-            Dirección:
-            <input 
-              type="text" 
-              value={direccion} 
-              onChange={(e) => setDireccion(e.target.value)}
-            />
-          </label>
+              <label>
+                Dirección:
+                <Field type="text" name="direccion" />
+                <ErrorMessage name="direccion" component="div" className={styles.error} />
+              </label>
 
-          <div className={styles.buttons}>
-            <button type="button" onClick={onClose}>
-              Cancelar
-            </button>
-            <button type="submit">Guardar</button>
-          </div>
-        </form>
+              <div className={styles.buttons}>
+                <button type="button" onClick={onClose}>
+                  Cancelar
+                </button>
+                <button type="submit" disabled={isSubmitting}>
+                  Guardar
+                </button>
+              </div>
+            </Form>
+          )}
+        </Formik>
       </div>
     </div>
   );

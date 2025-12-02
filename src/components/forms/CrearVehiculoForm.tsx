@@ -13,7 +13,9 @@ interface Props {
 }
 
 const validationSchema = Yup.object({
-  patente: Yup.string().required("La patente es obligatoria"),
+  patente: Yup.string()
+    .matches(/^[A-Za-z].*$/, "La patente no puede iniciar con un número")
+    .required("La patente es obligatoria"),
   modelo: Yup.string().required("El modelo es obligatorio"),
   anio: Yup.number()
     .min(1900, "Año inválido")

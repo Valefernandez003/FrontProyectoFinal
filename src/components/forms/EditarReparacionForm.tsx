@@ -5,6 +5,8 @@ import Select from "react-select";
 import type { SingleValue } from "react-select";
 import { vehiculoService } from "../../services/VehiculoService";
 import { reparacionService } from "../../services/reparacionService";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 
 interface VehiculoOption {
   value: string;
@@ -17,6 +19,15 @@ interface Props {
   onReparacionActualizada?: () => void;
 }
 
+// Validación con Yup
+const validationSchema = Yup.object().shape({
+  vehiculo: Yup.object().nullable().required("Seleccione un vehículo"),
+  fechaInicio: Yup.string().required("Ingrese la fecha de inicio"),
+  fechaFin: Yup.string().nullable(),
+  descripcion: Yup.string().required("Ingrese la descripción"),
+  precio: Yup.number().typeError("Ingrese un número válido").required("Ingrese el precio"),
+});
+
 export const EditarReparacionForm: React.FC<Props> = ({
   reparacion,
   onClose,
@@ -24,122 +35,121 @@ export const EditarReparacionForm: React.FC<Props> = ({
 }) => {
   const [vehiculos, setVehiculos] = useState<VehiculoOption[]>([]);
 
-  const [vehiculo, setVehiculo] = useState<VehiculoOption | null>(null);
-  const formatearFecha = (f: string) =>
-      f ? f.split("T")[0] : "";
+  const formatearFecha = (f: string) => (f ? f.split("T")[0] : "");
 
-  const [fechaInicio, setFechaInicio] = useState(formatearFecha(reparacion.fecha_inicio));
-  const [fechaFin, setFechaFin] = useState(formatearFecha(reparacion.fecha_fin));
-  const [descripcion, setDescripcion] = useState(reparacion.descripcion || "");
-  const [precio, setPrecio] = useState(reparacion.precio?.toString() || "");
-
-// Cargar datos iniciales
-useEffect(() => {
-
-  vehiculoService.getVehiculos().then((data) => {
-    const mapped = data.map((v: any) => ({
-      value: v.id.toString(),
-      label: `patente: ${v.patente}, auto: ${v.modelo}`,
-    }));
-    setVehiculos(mapped);
-
-    const actual = mapped.find((v) => Number(v.value) === reparacion.vehiculo_id);
-    setVehiculo(actual || null);
-  });
-}, [reparacion]);
-
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!vehiculo) {
-      alert("Seleccione un vehículo");
-      return;
-    }
-
-    const payload = {
-      vehiculo_id: Number(vehiculo.value),
-      fecha_inicio: fechaInicio,
-      fecha_fin: fechaFin || null,
-      precio: Number(precio),
-      descripcion: descripcion,
-      activo: reparacion.activo,
-    };
-
-    try {
-      await reparacionService.update(reparacion.id, payload);
-
-      if (onReparacionActualizada) onReparacionActualizada();
-      onClose();
-    } catch (err) {
-      console.error("Error al actualizar reparación:", err);
-      alert("Error al actualizar la reparación");
-    }
-  };
+  useEffect(() => {
+    vehiculoService.getVehiculos().then((data) => {
+      const mapped = data.map((v: any) => ({
+        value: v.id.toString(),
+        label: `Patente: ${v.patente}, Auto: ${v.modelo}`,
+      }));
+      setVehiculos(mapped);
+    });
+  }, []);
 
   return (
     <div className={styles.overlay}>
       <div className={styles.modal}>
         <h2>Editar Reparación</h2>
 
-        <form className={styles.form} onSubmit={handleSubmit}>
-          <label>
-            Vehículo:
-            <div className={styles.reactSelectWrapper}>
-              <Select
-                options={vehiculos}
-                value={vehiculo}
-                onChange={(newValue: SingleValue<VehiculoOption>) =>
-                  setVehiculo(newValue)
-                }
-                placeholder="Buscar vehículo..."
-                isSearchable
-                styles={selectDarkStyles}
-              />
-            </div>
-          </label>
+        <Formik
+          enableReinitialize
+          initialValues={{
+            vehiculo:
+              vehiculos.find((v) => Number(v.value) === reparacion.vehiculo_id) ||
+              null,
+            fechaInicio: formatearFecha(reparacion.fecha_inicio),
+            fechaFin: formatearFecha(reparacion.fecha_fin),
+            descripcion: reparacion.descripcion || "",
+            precio: reparacion.precio?.toString() || "",
+          }}
+          validationSchema={validationSchema}
+          onSubmit={async (values) => {
+            try {
+              const payload = {
+                vehiculo_id: Number(values.vehiculo!.value),
+                fecha_inicio: values.fechaInicio,
+                fecha_fin: values.fechaFin || null,
+                descripcion: values.descripcion,
+                precio: Number(values.precio),
+                activo: reparacion.activo,
+              };
+              await reparacionService.update(reparacion.id, payload);
+              if (onReparacionActualizada) onReparacionActualizada();
+              onClose();
+            } catch (err) {
+              console.error("Error al actualizar reparación:", err);
+              alert("Error al actualizar la reparación");
+            }
+          }}
+        >
+          {({ values, setFieldValue }) => (
+            <Form className={styles.form}>
+              <label>
+                Vehículo:
+                <div className={styles.reactSelectWrapper}>
+                  <Select
+                    options={vehiculos}
+                    value={values.vehiculo}
+                    onChange={(newValue: SingleValue<VehiculoOption>) =>
+                      setFieldValue("vehiculo", newValue)
+                    }
+                    placeholder="Buscar vehículo..."
+                    isSearchable
+                    styles={selectDarkStyles}
+                  />
+                </div>
+                <ErrorMessage
+                  name="vehiculo"
+                  component="div"
+                  className={styles.error}
+                />
+              </label>
 
-          <label>
-            Fecha inicio:
-            <input
-              type="date"
-              value={fechaInicio}
-              onChange={(e) => setFechaInicio(e.target.value)}
-            />
-          </label>
+              <label>
+                Fecha inicio:
+                <Field type="date" name="fechaInicio" />
+                <ErrorMessage
+                  name="fechaInicio"
+                  component="div"
+                  className={styles.error}
+                />
+              </label>
 
-          <label>
-            Fecha fin:
-            <input
-              type="date"
-              value={fechaFin}
-              onChange={(e) => setFechaFin(e.target.value)}
-            />
-          </label>
+              <label>
+                Fecha fin:
+                <Field type="date" name="fechaFin" />
+              </label>
 
-          <label>
-            Descripción pieza a cambiar:
-            <input
-              type="text"
-              value={descripcion}
-              onChange={(e) => setDescripcion(e.target.value)}
-            />
-          </label>
+              <label>
+                Descripción pieza a cambiar:
+                <Field type="text" name="descripcion" />
+                <ErrorMessage
+                  name="descripcion"
+                  component="div"
+                  className={styles.error}
+                />
+              </label>
 
-          <label>
-            Precio estimado:
-            <input
-              type="number"
-              value={precio}
-              onChange={(e) => setPrecio(e.target.value)}
-            />
-          </label>
+              <label>
+                Precio estimado:
+                <Field type="number" name="precio" />
+                <ErrorMessage
+                  name="precio"
+                  component="div"
+                  className={styles.error}
+                />
+              </label>
 
-          <div className={styles.buttons}>
-            <button type="button" onClick={onClose}>Cancelar</button>
-            <button type="submit">Guardar cambios</button>
-          </div>
-        </form>
+              <div className={styles.buttons}>
+                <button type="button" onClick={onClose}>
+                  Cancelar
+                </button>
+                <button type="submit">Guardar cambios</button>
+              </div>
+            </Form>
+          )}
+        </Formik>
       </div>
     </div>
   );
