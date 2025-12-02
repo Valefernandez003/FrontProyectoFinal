@@ -1,0 +1,70 @@
+.card {
+background: #1e1e1e;
+display: flex;
+flex-direction: column;
+width: 18rem;
+padding: 16px;
+border-radius: 12px;
+box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+color: #e3e3e3;
+border: 1px solid #8f8f8f;
+gap: 8px;
+cursor: pointer;
+position: relative;
+z-index: 1;
+}
+
+.card:hover {
+background-color: #2a2a2a;
+}
+
+.card h4 {
+margin: 0;
+font-size: 1.3rem;
+}
+
+.card p {
+margin: 4px 0;
+font-size: 1rem;
+}
+
+.headerRow {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.editButton {
+background: #e0e0e0;
+width: 4rem;
+border: none;
+padding: 4px 8px;
+border-radius: 1.5rem;
+cursor: pointer;
+font-size: 0.9rem;
+}
+
+.editButton:hover {
+background: #a0a0a0;
+}
+
+@media (max-width: 768px) {
+.card {
+width: 90%;
+padding: 12px;
+}
+
+.card h4 {
+font-size: 1.1rem;
+}
+
+.card p {
+font-size: 0.9rem;
+}
+
+.editButton {
+width: 3rem;
+font-size: 0.8rem;
+padding: 2px 6px;
+}
+}

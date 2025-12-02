@@ -1,0 +1,149 @@
+.menuBtn {
+  position: fixed;
+  top: 7rem;
+  left: 2rem;
+  cursor: pointer;
+  transition: all 0.5s ease-out;
+  z-index: 1001;
+}
+
+.btnLine {
+  width: 28px;
+  height: 3px;
+  margin: 0 0 5px 0;
+  background: #e0e0e0;
+  transition: all 0.5s ease-out;
+  border-radius: 3px;
+}
+
+.close {
+  transform: rotate(180deg);
+}
+
+.close .btnLine:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.close .btnLine:nth-child(2) {
+  opacity: 0;
+}
+
+.close .btnLine:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
+}
+
+.menu {
+  position: fixed;
+  top: 5rem;
+  left: 0;
+  width: 18vw;
+  height: calc(100vh - 5rem);
+  background-color: #424242;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-100%);
+  transition: all 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 8rem;
+}
+
+.menu.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+
+.menuBranding img {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  margin-bottom: 3rem;
+}
+
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 80%;
+}
+
+.button {
+  background-color: #4d4d4d;
+  border: 1px solid #e0e0e0;
+  border-radius: 1.5rem;
+  color: #e0e0e0;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  justify-content: flex-start;
+  cursor: pointer;
+  padding: 1rem 1.5rem;
+  width: 100%;
+  transition: all 0.25s ease;
+}
+
+.button:hover {
+  background-color: #6e6e6e;
+  transform: translateX(5px);
+}
+
+
+
+@media (max-width: 1024px) {
+  .menu {
+    width: 40vw;
+  }
+
+  .menuBtn {
+    top: 6rem;
+    left: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .menu {
+    width: 60vw;
+    padding-top: 6rem;
+  }
+
+  .menuBtn {
+    top: 5.5rem;
+    left: 1.2rem;
+  }
+
+  .button {
+    font-size: 1.1rem;
+    padding: 0.9rem 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .menu {
+    width: 75vw;
+    padding-top: 5rem;
+  }
+
+  .menuBtn {
+    left: 1rem;
+    top: 5rem;
+  }
+
+  .btnLine {
+    width: 24px;
+    height: 2.5px;
+  }
+
+  .button {
+    font-size: 1rem;
+    padding: 0.8rem 1rem;
+  }
+
+  .menuBranding img {
+    width: 4rem;
+    height: 4rem;
+  }
+}

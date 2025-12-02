@@ -1,0 +1,185 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 1.5rem;
+}
+
+.title {
+  font-size: 3rem;
+  color: #e0e0e0;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: 1rem;
+  color: #e0e0e0;
+}
+
+.reparaciones {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80vw;
+  min-height: 70vh;
+  padding: 1rem;
+  gap: 1rem;
+  border: 1px solid #565656;
+  border-radius: 1rem;
+  overflow-y: auto;
+}
+
+/* Scrollbar */
+.reparaciones::-webkit-scrollbar {
+  width: 8px;
+}
+.reparaciones::-webkit-scrollbar-track {
+  background: #1f1f1f;
+  border-radius: 10px;
+}
+.reparaciones::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 10px;
+}
+.reparaciones::-webkit-scrollbar-thumb:hover {
+  background: #777;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.button {
+  border-radius: 1.5rem;
+  background-color: #e0e0e0;
+  transition: 0.3s;
+  align-items: center;
+  justify-content: center;
+  font-size: .9rem;
+}
+.button:hover {
+  transform: scale(1.05);
+  background-color: #c4c4c4;
+}
+
+.message {
+  font-size: 1.4rem;
+  text-align: center;
+  color: #e0e0e0;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: #1e1e1e;
+  padding: 2rem;
+  border-radius: 1rem;
+  max-height: 80vh;
+  overflow-y: auto;
+  width: 60vw;
+  color: #e0e0e0;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  gap: 1rem;
+  justify-items: center;
+  margin-top: 1rem;
+}
+
+.card {
+  width: 100%; 
+  background: #2a2a2a;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.buttons {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.searchInput {
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  border: 1px solid #ccc;
+  margin-right: 1rem;
+  flex: 1;
+  max-width: 250px;
+}
+
+
+@media (max-width: 1024px) {
+  .modal {
+    width: 80vw;
+    padding: 1.5rem;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .modal {
+    width: 90vw;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .title {
+    font-size: 2.2rem;
+  }
+
+  .reparaciones {
+    width: 90vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+
+  .modal {
+    padding: 1rem;
+    width: 95vw;
+  }
+
+  .searchInput {
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .buttonContainer {
+    justify-content: center;
+  }
+
+  .button {
+    width: 100%;
+  }
+}

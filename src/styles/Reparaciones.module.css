@@ -1,0 +1,153 @@
+.main{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding-top: 1.5rem;
+}
+.title{
+  font-size: 3rem;
+  color: #e0e0e0;
+}
+.container{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: start;
+  padding-top: 1rem;
+  color: #e0e0e0;
+}
+.reparaciones {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 60vw;
+  height: 75vh;        
+  padding-top: 1rem;
+  gap: 1vh;
+  border: 1px solid #565656;
+  color: #e0e0e0;
+  border-radius: 1rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: 1rem;
+}
+
+/* scrollbar */
+.reparaciones::-webkit-scrollbar {
+  width: 8px;
+}
+.reparaciones::-webkit-scrollbar-track {
+  background: #1f1f1f;
+  border-radius: 10px;
+}
+.reparaciones::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 10px;
+}
+.reparaciones::-webkit-scrollbar-thumb:hover {
+  background: #777;
+}
+
+.buttonContainer {
+  display: grid;
+  align-items: end;
+  justify-content: end;
+  width: 100%;
+  padding: 1rem 2rem 0 0;
+  gap: 1rem;
+  position: sticky;
+  top: 0;           
+  z-index: 10;  
+}
+.button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 3.5rem;
+  width: 10rem;
+  border-radius: 1.5rem;
+  transition: 0.3s ease-in-out, transform 0.3s ease-in-out;
+  background-color: #e0e0e0;
+}
+.button:hover{
+  transform: scale(1.1);
+  background-color: #c4c4c4;
+}
+
+.message {
+  margin-top: 1rem;
+  font-size: 1.4rem;
+  color: #e0e0e0;
+  text-align: center;
+}
+.cards{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 1rem;
+  width: 95%;
+  gap: 2rem;
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+
+@media (max-width: 1024px) {
+  .reparaciones {
+    width: 80vw;
+    height: 70vh;
+  }
+
+  .cards {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.2rem;
+  }
+
+  .container {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .reparaciones {
+    width: 90vw;
+    height: 65vh;
+  }
+
+  .buttonContainer {
+    justify-content: center;
+    padding-right: 0;
+  }
+
+  .button {
+    width: 8rem;
+    height: 3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .reparaciones {
+    width: 95vw;
+    height: 60vh;
+  }
+
+  .button {
+    width: 100%;
+  }
+
+  .cards {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}

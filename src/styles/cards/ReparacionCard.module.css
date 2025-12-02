@@ -1,0 +1,117 @@
+.card {
+background: #1e1e1e;
+display: flex;
+flex-direction: column;
+width: 50rem;
+height: 17rem;
+border-radius: 12px;
+padding: 16px;
+margin-bottom: 18px;
+box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+color: #e3e3e3;
+border: 1px solid #8f8f8f;
+gap: 12px;
+}
+
+.header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+font-size: 1.4rem;
+}
+
+.bodyFooter {
+display: flex;
+gap: 24px;
+flex-wrap: wrap;
+}
+
+.body {
+display: flex;
+flex-direction: column;
+gap: 8px;
+flex: 1;
+}
+
+.buttons {
+display: flex;
+flex-direction: column;
+gap: 8px;
+}
+
+.status {
+align-items: center;
+padding: 4px 10px;
+border-radius: 8px;
+font-size: 0.85rem;
+background-color: #b49d08;
+color: #000;
+}
+
+.body p {
+margin: 4px 0;
+font-size: 1.1rem;
+}
+
+.btnEditar,
+.btnEliminar,
+.btnFinalizar {
+padding: 6px 10px;
+height: 3rem;
+border: none;
+border-radius: 1.5rem;
+cursor: pointer;
+font-size: 1rem;
+}
+
+.btnFinalizar {
+background-color: #0e7d0c;
+}
+
+.btnFinalizar:hover {
+background-color: #0b8c09;
+transform: scale(1.1);
+transition: transform 0.2s ease-in-out;
+}
+
+.btnEliminar {
+background-color: #c13834;
+}
+
+.btnEliminar:hover {
+background-color: #b02a25;
+transform: scale(1.1);
+transition: transform 0.2s ease-in-out;
+}
+
+.btnEditar:hover {
+transform: scale(1.1);
+transition: transform 0.2s ease-in-out;
+}
+
+.headerLeft {
+display: flex;
+flex-direction: column;
+gap: 4px;
+}
+
+.headerLeft p {
+font-size: 0.9rem;
+color: #ccc;
+margin: 0;
+}
+
+@media (max-width: 1024px) {
+.card {
+width: 90%;
+height: auto;
+}
+.bodyFooter {
+flex-direction: column;
+gap: 12px;
+}
+.buttons {
+flex-direction: row;
+gap: 8px;
+}
+}
