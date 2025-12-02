@@ -25,7 +25,7 @@ const EliminarReparacionFormInner: React.FC<Props> = ({
   onCancelar,
   onConfirmar,
 }) => {
-  useEffect(() => { /* Solucion del overlay que no cubre el boton */
+  useEffect(() => {
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
