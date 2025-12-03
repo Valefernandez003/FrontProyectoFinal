@@ -18,7 +18,6 @@ export const Avisos = () => {
   const fetchAvisos = async () => {
     try {
       const data = await anuncioService.getAnuncios("todo");
-      console.log("Datos recibidos del API:", data);
       setAvisos(data);
     } catch (err) {
       console.error("Error al cargar avisos:", err);

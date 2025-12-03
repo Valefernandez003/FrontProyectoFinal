@@ -2,7 +2,7 @@ import type { Anuncio, AnuncioFormData } from "../types/Anuncio";
 import { API_URL } from "./api";
 
 export const anuncioService = {
-  // Obtener anuncios (con o sin vencidos)
+  // Obtener anuncios
   async getAnuncios(mostrar?: "todo"): Promise<Anuncio[]> {
     const url = mostrar ? `/anuncios?mostrar=${mostrar}` : "/anuncios";
     const res = await API_URL.get<Anuncio[]>(url);

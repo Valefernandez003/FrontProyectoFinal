@@ -9,7 +9,6 @@ export const vehiculoService = {
     try {
       const res = await API_URL.get("/vehiculos");
       const data = Array.isArray(res.data) ? res.data : res.data.vehiculos;
-      console.log("Vehiculos:", data);
       return data;
     } catch (err: any) {
       console.error("Error al obtener vehículos:", err);
@@ -23,9 +22,6 @@ export const vehiculoService = {
   crearVehiculo: async (data: VehiculoFormData): Promise<Vehiculo> => {
     try {
       const res = await API_URL.post<Vehiculo>("/vehiculos", data);
-      console.log("Valores que se envían:", data);
-      console.log("RESPUESTA BACKEND:", res.data);
-
       return res.data;
     } catch (err: any) {
       console.error("Error al crear vehículo:", err);
@@ -37,7 +33,7 @@ export const vehiculoService = {
     }
   },
 
-  // Actualizar vehículo por ID
+  // Actualizar vehículo
   actualizarVehiculo: async (
     id: number,
     data: VehiculoFormData

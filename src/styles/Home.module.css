@@ -2,18 +2,106 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding-top: 10rem;
+  justify-content: flex-start;
+  padding-top: 2rem;
+  width: 100%;
+  min-height: 90vh;
+  color: #e0e0e0;
+}
+
+.main h1 {
+  font-size: 2.6rem;
+  margin-bottom: 1rem;
+  color: #e0e0e0;
+}
+
+.main h3 {
+  font-size: 1.8rem;
+  margin-top: 2rem;
+  color: #cfcfcf;
+}
+
+.cardContainer {
+  margin-top: 1.5rem;
+  width: 60vw;
+  min-height: 25vh;
+  border: 1px solid #565656;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow-y: auto;
+  background: #1f1f1f;
+}
+
+/* Scrollbar */
+.cardContainer::-webkit-scrollbar {
+  width: 8px;
+}
+.cardContainer::-webkit-scrollbar-track {
+  background: #1a1a1a;
+  border-radius: 10px;
+}
+.cardContainer::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 10px;
+}
+.cardContainer::-webkit-scrollbar-thumb:hover {
+  background: #777;
+}
+
+.card {
+  border: 1px solid #444;
+  border-radius: 1rem;
+  padding: 1.2rem;
+  background: #2b2b2b;
+  width: 100%;
+  transition: 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.02);
+  background: #363636;
+}
+
+.card h4 {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+  color: #e6e6e6;
+}
+
+.card p {
+  margin-bottom: 0.4rem;
+  color: #d0d0d0;
+}
+
+@media (max-width: 1024px) {
+  .cardContainer {
+    width: 80vw;
+  }
 }
 
 @media (max-width: 768px) {
-  .main {
-    padding-top: 6rem;
+  .main h1 {
+    font-size: 2rem;
+  }
+
+  .cardContainer {
+    width: 90vw;
   }
 }
 
 @media (max-width: 480px) {
-  .main {
-    padding-top: 4rem;
+  .main h1 {
+    font-size: 1.8rem;
+  }
+
+  .cardContainer {
+    width: 95vw;
+  }
+
+  .card {
+    padding: 1rem;
   }
 }

@@ -64,9 +64,8 @@ export const CrearAvisoForm: React.FC<Props> = ({ onClose }) => {
     };
 
     try {
-      const anuncio = await anuncioService.createAnuncio(payload);
-      console.log("Anuncio creado:", anuncio);
-      onClose(); // Cierra modal al guardar
+      await anuncioService.createAnuncio(payload);
+      onClose();
     } catch (err) {
       console.error("Error creando anuncio:", err);
       alert("Error al crear anuncio");

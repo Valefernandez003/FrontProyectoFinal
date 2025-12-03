@@ -92,8 +92,6 @@
   gap: 2rem;
 }
 
-/* ---------------- RESPONSIVE ---------------- */
-
 @media (max-width: 1024px) {
   .reparaciones {
     width: 80vw;
