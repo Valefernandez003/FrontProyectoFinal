@@ -21,7 +21,6 @@
   height: 5rem;
 }
 
-/* RESPONSIVE */
 @media (max-width: 768px) {
   .container {
     height: 4.5rem;
