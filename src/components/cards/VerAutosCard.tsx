@@ -92,7 +92,7 @@ export const VerAutosCard: React.FC<VerAutosCardProps> = ({
                         {reparaciones[auto.id].map(r => (
                           <li key={r.id} className={styles.reparacionItem}>
                             <p><strong>Descripción:</strong> {r.descripcion}</p>
-                            <p><strong>Finalizado:</strong> {r.fecha_fin ? new Date(r.fecha_fin).toLocaleDateString() : "N/A"}</p>
+                            <p><strong>Finalización:</strong> {r.fecha_fin ? new Date(r.fecha_fin).toLocaleDateString() : "N/A"}</p>
                             <p><strong>Total:</strong> ${r.precio}</p>
                           </li>
                         ))}

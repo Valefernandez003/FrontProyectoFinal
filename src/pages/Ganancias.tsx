@@ -176,7 +176,7 @@ export const Ganancias = () => {
             <div className={styles.financialList}>
               <p>Ingresos: ${totalIngresos}</p>
               <p>Egresos: ${totalEgresos}</p>
-              <p>Total: ${total}</p>
+              <p>Ganancia total: ${total}</p>
             </div>
           </div>
         </div>
