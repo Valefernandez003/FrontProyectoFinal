@@ -18,7 +18,7 @@ export const Aside: React.FC = () => {
 
   return (
     <header>
-      {/* Botón menú */}
+      
       <div
         className={`${styles.menuBtn} ${open ? styles.close : ""}`}
         onClick={toggleOpen}
@@ -28,7 +28,7 @@ export const Aside: React.FC = () => {
         <div className={styles.btnLine}></div>
       </div>
 
-      {/* Aside */}
+
       <aside className={`${styles.menu} ${open ? styles.show : ""}`}>
         <div className={styles.menuBranding}>
           <img src={logoTaller} alt="Logo del taller" />

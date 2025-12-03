@@ -72,7 +72,6 @@ export const Ganancias = () => {
           }
         });
 
-        // Filtrar mes y año
         if (mesSeleccionado) {
           const mesNum = meses[mesSeleccionado];
           const actualYear = new Date().getFullYear();
@@ -82,7 +81,6 @@ export const Ganancias = () => {
           });
         }
 
-        // Ordenar los movimientos
         movimientosTemp.sort((a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime());
 
         setMovimientos(movimientosTemp);
@@ -98,7 +96,6 @@ export const Ganancias = () => {
     fetchMovimientos();
   }, [mesSeleccionado]);
 
-  // Totales
   const ingresos = movimientos.filter(m => m.tipo === "ingreso");
   const egresos = movimientos.filter(m => m.tipo === "egreso");
 

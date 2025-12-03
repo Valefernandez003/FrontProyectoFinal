@@ -11,7 +11,6 @@ justify-content: center;
 z-index: 9999;
 }
 
-/* Contenedor del modal */
 .modal {
 background: #1b1b1b;
 padding: 2rem;
@@ -25,14 +24,12 @@ flex-direction: column;
 gap: 1rem;
 }
 
-/* Formulario */
 .form {
 display: flex;
 flex-direction: column;
 gap: 1rem;
 }
 
-/* Etiquetas y inputs */
 .form label {
 display: flex;
 flex-direction: column;
@@ -58,14 +55,12 @@ input[type="number"] {
 appearance: textfield;
 }
 
-/* Contenedor de botones */
 .buttons {
 display: flex;
 justify-content: space-between;
 margin-top: 1rem;
 }
 
-/* Botones */
 button {
 padding: 0.7rem 1.5rem;
 border-radius: 1.5rem;
@@ -92,7 +87,6 @@ button[type="button"]:hover {
 background: #444;
 }
 
-/* Botones pequeños */
 .smallButton {
 padding: 0.5rem 1rem;
 border-radius: 1.5rem;
@@ -106,22 +100,12 @@ align-items: center;
 justify-content: center;
 }
 
-/* Mensajes de error */
 .error {
 color: #ff6b6b;
 font-size: 0.85rem;
 margin-top: 0.2rem;
 }
 
-/* Inputs deshabilitados */
-.disabledInput {
-background-color: #2d2d2d;
-color: #b8b8b8;
-cursor: not-allowed;
-border: 1px solid #444;
-}
-
-/* Responsive */
 @media (max-width: 768px) {
 .modal {
 width: 90vw;

@@ -19,7 +19,6 @@ interface Props {
   onReparacionActualizada?: () => void;
 }
 
-// Validación con Yup
 const validationSchema = Yup.object().shape({
   vehiculo: Yup.object().nullable().required("Seleccione un vehículo"),
   fechaInicio: Yup.string().required("Ingrese la fecha de inicio"),

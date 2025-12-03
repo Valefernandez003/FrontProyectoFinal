@@ -9,7 +9,6 @@ import { vehiculoService } from "../services/VehiculoService";
 import { ClienteList } from "../components/list/ClienteList";
 import { VerAutosCard } from "../components/cards/VerAutosCard";
 
-// Cliente con email obligatorio
 export interface Cliente {
   id: number;
   nombre: string;
@@ -38,7 +37,7 @@ export const Clientes: React.FC = () => {
   const cargarClientes = async () => {
     try {
       const data = await clienteService.getClientes();
-      // Forzar que email nunca sea undefined
+
       const clientesConEmail: Cliente[] = data.map((c: any) => ({
         ...c,
         email: c.email ?? "",

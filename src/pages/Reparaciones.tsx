@@ -112,7 +112,7 @@ export const Reparaciones: React.FC = () => {
             </div>
           <div className={styles.cards}>
             <ReparacionList
-              reparaciones={reparaciones.filter(r => r.activo)} // <-- filtra solo activas
+              reparaciones={reparaciones.filter(r => r.activo)}
               onFinalizar={finalizarReparacion}
               onEliminar={eliminarReparacion}
               onEditar={editarReparacion}
